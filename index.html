@@ -73,7 +73,7 @@
         </h1>
         <div class="subheading mb-5">Carlos Antúnez 1875, apt 405 · Santiago, Chile 
           <br> (+56) 9 5257 0855 ·
-          <a href="mailto:name@email.com">pablo.arroyo.noe@gmail.com</a>
+          <a href="mailto:pablo.arroyo.noe@gmail.com">pablo.arroyo.noe@gmail.com</a>
         </div>
         <p class="lead">
           Software development is not just coding, it can be a driving force for the technology that is changing the world for the better.
@@ -368,6 +368,57 @@
 
   </div>
 
+  <div class="tools">
+    <a class="btn btn-lg" data-toggle="modal" data-target="#contactModal">
+      <i class="fas fa-envelope"></i> Contact
+    </a>
+              <form name="contactForm" action="/" method="GET" data-netlify="true" novalidate="novalidate">
+
+            <div class="form-group">
+              <label for="contact_name">Name</label>
+              <input type="text" class="form-control" id="contact_name" name="name" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <label for="contact_email">Email</label>
+              <input type="email" class="form-control" id="contact_email" name="email" placeholder="Contact email">
+            </div>
+            <div class="form-group">
+              <label for="content">Message</label>
+              <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+            </div>
+            <div id="success"></div>
+            <div class="text-center">
+                        <div class="control-group">
+              <div class="form-group floating-label-form-group controls mt-2 mb-0 pb-2">
+                <div data-netlify-recaptcha="true"></div>
+              </div>
+            </div>
+              <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+
+
+          <form>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -377,6 +428,7 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/resume.min.js"></script>
+
 
 </body>
 
