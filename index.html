@@ -91,6 +91,9 @@
           <a href="https://github.com/paulnoe" target="blank">
             <i class="fab fa-github"></i>
           </a>
+          <a data-toggle="modal" data-target="#contactModal">
+            <i class="fas fa-envelope"></i>
+          </a>
         </div>
         
       </div>
@@ -370,12 +373,20 @@
 
   </div>
 
-  <div class="tools">
-    <a class="btn btn-lg" data-toggle="modal" data-target="#contactModal">
-      <i class="fas fa-envelope"></i> Contact
-    </a>
-              <form name="contactForm" action="/" method="GET" data-netlify="true" novalidate="novalidate">
+  <!-- Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel">Contact</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
+        <div class="modal-body">
+
+          <form name="contact" netlify>
             <div class="form-group">
               <label for="contact_name">Name</label>
               <input type="text" class="form-control" id="contact_name" name="name" placeholder="Your Name">
@@ -397,23 +408,7 @@
             </div>
               <button type="submit" class="btn btn-primary">Send</button>
             </div>
-
-
-          <form>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
+          </form>
 
         </div>
 
