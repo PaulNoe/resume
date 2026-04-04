@@ -465,7 +465,8 @@
 
 <script>
   (function () {
-    var isDark = !(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+    var saved = localStorage.getItem('theme');
+    var isDark = saved ? saved === 'dark' : !(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
 
     function applyTheme(dark) {
       isDark = dark;
@@ -473,6 +474,7 @@
       document.getElementById('moonIcon').classList.toggle('lit', !dark);
       document.getElementById('sunIcon').classList.toggle('lit', dark);
       document.getElementById('toggleThumb').classList.toggle('right', !dark);
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
     }
     applyTheme(isDark);
     document.getElementById('themeToggle').addEventListener('click', function () { applyTheme(!isDark); });
