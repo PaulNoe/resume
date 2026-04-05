@@ -116,6 +116,9 @@
     }
     .cv-download:hover{background:var(--toggle-bg);border-color:var(--accent);color:var(--accent-hover)}
     .cv-download svg{width:13px;height:13px;flex-shrink:0}
+    .hero-actions{display:flex;align-items:center;gap:1rem;margin-top:1.6rem}
+    .hero-actions .cv-download{margin-top:0}
+    .hero-actions .theme-toggle-mobile{display:none}
 
     /* Sticky nav */
     .nav{
@@ -132,7 +135,7 @@
       z-index:10;
       transition:background .25s ease
     }
-    .nav-links{display:flex;gap:2rem;flex:1}
+    .nav-links{display:flex;gap:2rem;flex:1;order:-1}
     .nav-links a{
       font-size:.75rem;
       letter-spacing:.08em;
@@ -169,6 +172,8 @@
     }
     .toggle-thumb.right{transform:translateX(16px)}
     .hamburger{display:none}
+    .nav-home{display:none}
+    .nav-section-label{display:none}
 
     /* Sections */
     .section{padding:3.5rem 0;border-bottom:.5px solid var(--border)}
@@ -241,32 +246,58 @@
       .hero-contact{gap:.4rem 1rem;font-size:.78rem}
 
       /* Nav */
+      .nav-home,.hamburger{opacity:0;pointer-events:none;transition:opacity .2s;width:0;overflow:hidden}
+      .nav.is-sticky .nav-home,
+      .nav.is-sticky .hamburger{opacity:1;pointer-events:auto;width:auto;overflow:visible}
+      .nav-home{
+        display:flex;align-items:center;justify-content:center;
+        flex-shrink:0;background:none;border:none;cursor:pointer;padding:0;
+        color:var(--text-nav);transition:color .2s
+      }
+      .nav-home:hover{color:var(--accent)}
+      .nav-home svg{width:16px;height:16px}
+      .nav-section-label{
+        display:none;flex:1;padding:0 .75rem;
+        font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--accent);font-weight:400
+      }
+      .nav.is-sticky .nav-section-label{display:block}
+      .theme-toggle{display:none}
+      .hero-actions .theme-toggle-mobile{display:flex}
       .nav{padding:.9rem 0;flex-wrap:wrap;gap:0}
+      /* Not sticky: links show inline, no dropdown behaviour */
       .nav-links{
+        display:flex;flex-direction:row;flex-wrap:wrap;gap:.6rem 1.2rem;
+        width:100%;order:-1;
+        border-top:none;margin-top:0
+      }
+      .nav-links a{
+        font-size:.72rem;padding:0;
+        border-bottom:none
+      }
+      /* Sticky: links become the collapsible dropdown */
+      .nav.is-sticky .nav-links{
         display:none;flex-direction:column;gap:0;flex:none;
         width:100%;margin-top:.75rem;
-        border-top:.5px solid var(--border)
+        border-top:.5px solid var(--border);
+        order:1
       }
-      .nav-links.open{display:flex}
-      .nav-links a{
+      .nav.is-sticky .nav-links.open{display:flex}
+      .nav.is-sticky .nav-links a{
         font-size:.8rem;padding:.65rem 0;
         border-bottom:.5px solid var(--border)
       }
-      .nav-links a:last-child{border-bottom:none}
+      .nav.is-sticky .nav-links a:last-child{border-bottom:none}
       .hamburger{
-        display:flex;flex-direction:column;justify-content:center;gap:4px;
-        width:22px;height:22px;flex-shrink:0;
-        background:none;border:none;cursor:pointer;padding:0;margin-left:auto
+        display:flex;align-items:center;justify-content:center;
+        flex-shrink:0;background:none;border:none;cursor:pointer;padding:0
       }
-      .hamburger span{
-        display:block;height:1.5px;width:100%;
-        background:var(--text-nav);border-radius:2px;
-        transition:transform .22s ease,opacity .22s ease,background .2s
+      .chevron-icon{
+        width:18px;height:18px;color:var(--text-nav);
+        transition:transform .25s ease,color .2s
       }
-      .hamburger:hover span{background:var(--accent)}
-      .hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-      .hamburger.open span:nth-child(2){opacity:0}
-      .hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+      .hamburger:hover .chevron-icon{color:var(--accent)}
+      .hamburger.open .chevron-icon{transform:rotate(180deg)}
 
       /* Sections */
       .section{padding:2.5rem 0}
@@ -309,25 +340,40 @@
         <a href="https://www.linkedin.com/in/pablo-noe" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="https://github.com/paulnoe" target="_blank" rel="noreferrer">GitHub</a>
       </div>
-      <a class="cv-download" href="./pdf/pablo-arroyo-noe-resume.pdf" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        Download CV
-      </a>
+      <div class="hero-actions">
+        <a class="cv-download" href="./pdf/pablo-arroyo-noe-resume.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download CV
+        </a>
+        <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" aria-label="Toggle theme">
+          <svg class="toggle-icon" id="moonIconMobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <div class="toggle-track"><div class="toggle-thumb" id="toggleThumbMobile"></div></div>
+          <svg class="toggle-icon" id="sunIconMobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Nav -->
     <nav class="nav">
-      <div class="nav-links" id="navLinks">
-        <a href="#summary">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
-        <a href="#additional">More</a>
-      </div>
+      <button class="nav-home" id="navHome" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/>
+          <polyline points="9 21 9 12 15 12 15 21"/>
+        </svg>
+      </button>
+      <span class="nav-section-label" id="navSectionLabel"></span>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <svg class="toggle-icon" id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -342,8 +388,17 @@
         </svg>
       </button>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
       </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#summary">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#additional">More</a>
+      </div>
     </nav>
 
     <!-- About -->
@@ -532,10 +587,14 @@
       document.getElementById('moonIcon').classList.toggle('lit', !dark);
       document.getElementById('sunIcon').classList.toggle('lit', dark);
       document.getElementById('toggleThumb').classList.toggle('right', !dark);
+      document.getElementById('moonIconMobile').classList.toggle('lit', !dark);
+      document.getElementById('sunIconMobile').classList.toggle('lit', dark);
+      document.getElementById('toggleThumbMobile').classList.toggle('right', !dark);
       localStorage.setItem('theme', dark ? 'dark' : 'light');
     }
     applyTheme(isDark);
     document.getElementById('themeToggle').addEventListener('click', function () { applyTheme(!isDark); });
+    document.getElementById('themeToggleMobile').addEventListener('click', function () { applyTheme(!isDark); });
 
     // Fade-in
     var fadeEls = document.querySelectorAll('.fade-in');
@@ -549,15 +608,19 @@
 
     // Active nav
     var sectionIds = ['summary', 'experience', 'skills', 'education', 'additional'];
-    var navLinks = {};
+    var navAnchors = {};
     sectionIds.forEach(function (id) {
-      navLinks[id] = document.querySelector('.nav-links a[href="#' + id + '"]');
+      navAnchors[id] = document.querySelector('.nav-links a[href="#' + id + '"]');
     });
+    var navSectionLabel = document.getElementById('navSectionLabel');
     var navObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
-          sectionIds.forEach(function (id) { if (navLinks[id]) navLinks[id].classList.remove('active'); });
-          if (navLinks[e.target.id]) navLinks[e.target.id].classList.add('active');
+          sectionIds.forEach(function (id) { if (navAnchors[id]) navAnchors[id].classList.remove('active'); });
+          if (navAnchors[e.target.id]) {
+            navAnchors[e.target.id].classList.add('active');
+            navSectionLabel.textContent = navAnchors[e.target.id].textContent;
+          }
         }
       });
     }, { rootMargin: '-40% 0px -50% 0px' });
@@ -566,7 +629,25 @@
       if (el) navObs.observe(el);
     });
 
-    // Hamburger menu
+    // Show mobile nav bar only when sticky (hero out of view)
+    var navEl = document.querySelector('.nav');
+    var heroObs = new IntersectionObserver(function (entries) {
+      var sticky = !entries[0].isIntersecting;
+      navEl.classList.toggle('is-sticky', sticky);
+      if (!sticky) {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    }, { threshold: 0 });
+    heroObs.observe(document.getElementById('heroEl'));
+
+    // Home button
+    document.getElementById('navHome').addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Chevron menu
     var hamburger = document.getElementById('hamburger');
     var navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', function () {
