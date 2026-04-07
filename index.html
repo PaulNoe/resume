@@ -683,7 +683,11 @@
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
         var target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        if (target) {
+          var offset = navEl.getBoundingClientRect().height;
+          var top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
       });
     });
   })();
